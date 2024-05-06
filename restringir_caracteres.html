@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numeros">Permitir exclusivamente números:</label>
+    <input type="text" id="numeros" onkeypress="return permitir(event, 'N')" />
+    <br>
+    <label for="letras">Permitir exclusivamente letras:</label>
+    <input type="text" id="letras" onkeypress="return permitir(event, 'C')" />
+    <br>
+    <label for="numeros_letras">Permitir exclusivamente números o letras:</label>
+    <input type="text" id="numeros_letras" onkeypress="return permitir(event, 'N_C')" />
+
+<script>
+function permitir(elEvento, permitidos) {
+    // Variables que definen los caracteres permitidos
+    var numeros = "0123456789";
+    var caracteres = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóúÁÉÍÓÚ";
+    var numeros_caracteres = numeros + caracteres;
+    var teclas_especiales = [8, 37, 39, 46]; // BackSpace, flecha izquierda, flecha derecha, Supr
+    
+    // Obtener el evento
+    var evento = elEvento || window.event;
+    // Obtener el código del carácter
+    var codigoCaracter = evento.charCode || evento.keyCode;
+    // Convertir el código del carácter en su representación textual
+    var caracter = String.fromCharCode(codigoCaracter);
+    
+    // Comprobar si es una tecla especial
+    var tecla_especial = false;
+    for (var i in teclas_especiales) {
+        if (codigoCaracter === teclas_especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+    
+    // Comprobar si el carácter está permitido o si es una tecla especial
+    return permitidos.indexOf(caracter) !== -1 || tecla_especial;
+}
+</script>
+
+</body>
+</html>
