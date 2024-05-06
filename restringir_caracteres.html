@@ -41,7 +41,16 @@ function permitir(elEvento, permitidos) {
     }
     
     // Comprobar si el carácter está permitido o si es una tecla especial
-    return permitidos.indexOf(caracter) !== -1 || tecla_especial;
+    if (permitidos === 'N' && numeros.indexOf(caracter) !== -1) {
+        return true;
+    }
+    if (permitidos === 'C' && caracteres.indexOf(caracter) !== -1) {
+        return true;
+    }
+    if (permitidos === 'N_C' && numeros_caracteres.indexOf(caracter) !== -1) {
+        return true;
+    }
+    return tecla_especial;
 }
 </script>
 
